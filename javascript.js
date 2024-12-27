@@ -1,73 +1,75 @@
-// 0: rock
-// 1: paper
-// 2: scissors
+document.addEventListener('DOMContentLoaded', () => {
+    let humanScore = 0, computerScore = 0;
 
-let humanScore = 0, computerScore = 0;
-
-function getComputerChoice(){
-    return Math.floor(Math.random() * 3);
-}
-
-function getHumanChoice(){
-    let choice = prompt("Rock, paper, or scissors: ").toLowerCase();
-    if (choice == "rock") return 0;
-    else if (choice == "paper") return 1;
-    else if (choice == "scissors") return 2;
-    else {
-        return ("bruh");
+    function getComputerChoice(){
+        return Math.floor(Math.random() * 3);
     }
-    return prompt("Rock, paper, or scissors: ");
-}
 
-function playRound(humanChoice, computerChoice) {
-    switch(humanChoice){
-        case 0:
-            switch(computerChoice){
-                case 0:
-                    return ("Rock vs Rock = Tie!");
-                    break;
-                case 1:
-                    return ("You lost! Rock vs Paper");
-                    break;
-                case 2:
-                    return ("You won! Rock vs scissors");
-                    break;
-            }
-            break;
-        case 1:
-            switch(computerChoice){
-                case 0:
-                    return ("You won! Paper vs rock");
-                    break;
-                case 1:
-                    return ("Paper vs Paper = Tie!");
-                    break;
-                case 2:
-                    return ("You lost! Paper vs scissors");
-                    break;
-            }
-            break;
-        case 2:
-            switch(computerChoice){
-                case 0:
-                    return ("You lost! Scissors vs rock");
-                    break;
-                case 1:
-                    return ("You won! Scissor vs Paper");
-                    break;
-                case 2:
-                    return ("Scissor vs scissor = Tie!");
-                    break;
-            }
-            break;
+    function playRound(humanChoice, computerChoice) {
+        let result = '';
+        switch(humanChoice) {
+            case 0: // rock
+                switch(computerChoice) {
+                    case 0:
+                        result = "Rock vs Rock = Tie!";
+                        break;
+                    case 1:
+                        result = "You lost! Rock vs Paper";
+                        break;
+                    case 2:
+                        result = "You won! Rock vs Scissors";
+                        break;
+                }
+                break;
+            case 1: // paper
+                switch(computerChoice) {
+                    case 0:
+                        result = "You won! Paper vs Rock";
+                        break;
+                    case 1:
+                        result = "Paper vs Paper = Tie!";
+                        break;
+                    case 2:
+                        result = "You lost! Paper vs Scissors";
+                        break;
+                }
+                break;
+            case 2: // scissors
+                switch(computerChoice) {
+                    case 0:
+                        result = "You lost! Scissors vs Rock";
+                        break;
+                    case 1:
+                        result = "You won! Scissors vs Paper";
+                        break;
+                    case 2:
+                        result = "Scissors vs Scissors = Tie!";
+                        break;
+                }
+                break;
+        }
+        return result;
     }
-}
-  
-function playGame(){
-    for (let i = 0; i<5;i++){
-        console.log(playRound(getHumanChoice(), getComputerChoice()));
-    }
-}
 
+    // Function to handle button clicks and game logic
+    document.getElementById('rock-button').addEventListener('click', () => {
+        const humanChoice = 0; // rock
+        const computerChoice = getComputerChoice();
+        const result = playRound(humanChoice, computerChoice);
+        document.getElementById('result').textContent = result;
+    });
 
-playGame();
+    document.getElementById('paper-button').addEventListener('click', () => {
+        const humanChoice = 1; // paper
+        const computerChoice = getComputerChoice();
+        const result = playRound(humanChoice, computerChoice);
+        document.getElementById('result').textContent = result;
+    });
+
+    document.getElementById('scissors-button').addEventListener('click', () => {
+        const humanChoice = 2; // scissors
+        const computerChoice = getComputerChoice();
+        const result = playRound(humanChoice, computerChoice);
+        document.getElementById('result').textContent = result;
+    });
+});
